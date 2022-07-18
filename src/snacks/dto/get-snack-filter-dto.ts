@@ -1,6 +1,6 @@
-import { SnackRange } from '../snack.model';
+import { SnackPrice } from '../snack.model';
 
 export class GetSnacksFilterDto {
-  range?: SnackRange;
+  price?: SnackPrice;
   search?: string;
 }

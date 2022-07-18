@@ -2,9 +2,9 @@ export interface Snack {
   id: string;
   title: string;
   description: string;
-  range: SnackRange;
+  price: SnackPrice;
 }
-export enum SnackRange {
+export enum SnackPrice {
   MAXPRICE = 'MAXPRICE',
   MINPRICE = 'MINPRICE',
   AVERAGE = 'AVERAGE',

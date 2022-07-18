@@ -7,7 +7,7 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { Snack, SnackRange } from './snack.model';
+import { Snack, SnackPrice } from './snack.model';
 import { SnacksService } from './snacks.service';
 import { CreateSnackDto } from './dto/create-snack-dto';
 
@@ -40,11 +40,11 @@ export class SnacksController {
   }
 
   // update method
-  @Patch('/:id/range')
+  @Patch('/:id/price')
   updateSnackRange(
     @Param('id') id: string,
-    @Body('range') range: SnackRange,
+    @Body('price') price: SnackPrice,
   ): Snack {
-    return this.snacksService.updateSnackRange(id, range);
+    return this.snacksService.updateSnackRange(id, price);
   }
 }

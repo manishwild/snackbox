@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Snack, SnackRange } from './snack.model';
+import { Snack, SnackPrice } from './snack.model';
 import { v4 as uuid } from 'uuid';
 import { CreateSnackDto } from './dto/create-snack-dto';
 import { GetSnacksFilterDto } from './dto/get-snack-filter-dto';
@@ -15,11 +15,11 @@ export class SnacksService {
 
   // filter and search method
   getSnacksWithFilters(filterDto: GetSnacksFilterDto): Snack[] {
-    const { range, search } = filterDto;
+    const { price, search } = filterDto;
     let snacks = this.getAllSnack();
 
-    if (range) {
-      snacks = snacks.filter((snack) => snack.range === range);
+    if (price) {
+      snacks = snacks.filter((snack) => snack.price === price);
     }
 
     if (search) {
@@ -48,16 +48,16 @@ export class SnacksService {
       id: uuid(),
       title,
       description,
-      range: SnackRange.MINPRICE,
+      price: SnackPrice.MINPRICE,
     };
     this.snacks.push(snack);
     return snack;
   }
 
   // patch method
-  updateSnackRange(id: string, range: SnackRange): Snack {
+  updateSnackRange(id: string, price: SnackPrice): Snack {
     const snack = this.getSnackById(id);
-    snack.range = range;
+    snack.price = price;
     return snack;
   }
 
