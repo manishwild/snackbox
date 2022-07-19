@@ -6,10 +6,12 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { Snack, SnackPrice } from './snack.model';
 import { SnacksService } from './snacks.service';
 import { CreateSnackDto } from './dto/create-snack-dto';
+import { GetSnacksFilterDto } from './dto/get-snack-filter-dto';
 
 @Controller('snacks')
 export class SnacksController {
@@ -17,8 +19,12 @@ export class SnacksController {
 
   //Get Method
   @Get()
-  getSnack(): Snack[] {
-    return this.snacksService.getAllSnack();
+  getSnack(@Query() filterDto: GetSnacksFilterDto): Snack[] {
+    if (Object.keys(filterDto).length) {
+      return this.snacksService.getSnacksWithFilters(filterDto);
+    } else {
+      return this.snacksService.getAllSnack();
+    }
   }
 
   //Get Snack by Id
